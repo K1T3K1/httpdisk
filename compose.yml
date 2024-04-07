@@ -1,0 +1,9 @@
+services:
+  api:
+    image: api
+    ports:
+      - ${API_PORT}:${API_PORT}
+    env_file: .env
+    build:
+      context: .
+      dockerfile: ./src/Dockerfile
