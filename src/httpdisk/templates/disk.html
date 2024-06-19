@@ -1,0 +1,48 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>HTTP Disk</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('templates', path='/disk.css') }}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+    <div class="centerBox">
+        <h1 class="sweetTitle">
+            <span data-text="HTTP">HTTP</span>
+            <span data-text="DISK">DISK</span>
+        </h1>
+        <div class="menuDiv">
+            <ul class="menuList">
+                <li><a href="{{ url_for('upload_file_form')}}">Upload</a></li>
+                <li><a href="{{ url_for('read_disk') }}">Refresh</a></li>
+            </ul>
+        </div>
+        <div class="leftBox">
+            <ul class="diskObjects">
+                {% for element in elements %}
+                <div class="diskObject">
+                    <div class="titleContainer">
+                        <a class="diskObjectTitle">{{ element }}</a>
+                    </div>
+                    <div class="diskObjectActions">
+                        <a href="{{ url_for('get_file_endpoint', filename=element) }}">
+                            <div class="diskObjectAction">
+                                <span class="material-icons md-36">cloud_download</span>
+                            </div>
+                        </a>
+                        <form action="{{ url_for('delete_file_endpoint')}}" method="post">
+                            <input type="hidden" value="{{ element }}" name="filename" />
+                            <button type="submit" class="diskObjectAction">
+                                <span class="material-icons md-36">delete</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+</html>

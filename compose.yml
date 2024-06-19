@@ -1,9 +1,10 @@
 services:
   api:
-    image: api
+    image: skeletorsapi
     ports:
       - ${API_PORT}:${API_PORT}
     env_file: .env
     build:
       context: .
       dockerfile: ./src/Dockerfile
+    platform: linux/amd64

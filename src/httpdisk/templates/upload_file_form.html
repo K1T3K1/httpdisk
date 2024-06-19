@@ -1,0 +1,63 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>HTTP Disk</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('templates', path='/disk.css') }}">
+    <script>
+        var fileCount = 0
+        function addFileInput() {
+            fileCount++;
+            var fileInputContainer = document.getElementById("fileInputContainer");
+            
+            var newFileInput = document.createElement("input");
+            newFileInput.type = "file";
+            newFileInput.name = "files";
+            newFileInput.id = "fileUpload"
+            
+            var labelInput = document.createElement("label")
+            labelInput.htmlFor = "fileUpload"
+            labelInput.className = "fileUpload"
+            labelInput.textContent = "Select file"
+
+            var newFilenameInput = document.createElement("input");
+            newFilenameInput.type = "text";
+            newFilenameInput.name = "filenames";
+            newFilenameInput.placeholder = "File name";
+            newFilenameInput.id = "filenameInput" + fileCount;
+            
+            newFileInput.addEventListener('change', function() {
+                if (newFileInput.files.length > 0) {
+                    document.getElementById("filenameInput" + fileCount).value = newFileInput.files[0].name;
+                }
+            });
+
+            fileInputContainer.appendChild(labelInput)
+            fileInputContainer.appendChild(newFileInput);
+            fileInputContainer.appendChild(newFilenameInput);
+        }
+    </script>
+</head>
+
+<body>
+    <div class="centerBox">
+        <h1 class="sweetTitle">
+            <span data-text="HTTP"><a href="{{ url_for( 'read_disk' ) }}"></a>HTTP</span>
+            <span data-text="DISK"><a href="{{ url_for( 'read_disk' ) }}"></a>DISK</span>
+        </h1>
+        <div class="menuDiv">
+            <ul class="menuList">
+                <li><a href="{{ url_for('read_disk') }}">Disk</a></li>
+            </ul>
+        </div>
+        <div class="uploadForm">
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <div class="fileInputContainer" id="fileInputContainer">
+                </div>
+                <button class="uploadButton" type="button" onclick="addFileInput()">Add another file</button>
+                <button class="uploadButton" type="submit">Upload</button>
+            </form>
+        </div>
+    </div>
+
+</html>

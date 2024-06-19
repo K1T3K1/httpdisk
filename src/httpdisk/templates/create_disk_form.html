@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+        <title>HTTP Disk</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('templates', path='/index.css') }}">
+    </head>
+
+    <body>
+        <div class="centerBox">
+            <h1 class="sweetTitle">
+                <span data-text="HTTP">HTTP</span>
+                <span data-text="DISK">DISK</span>
+            </h1>
+        </div>
+        <div class="centerBox">
+            <ul class="menu">
+                <form class="myForm" action="disk" method="post">
+                    <button class="myButton">CREATE DISK</button>
+                </form>
+            </ul>
+        </div>
+</html>
